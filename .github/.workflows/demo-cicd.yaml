@@ -1,0 +1,34 @@
+# Workflow akan dijalankan ketika ada push ke branch main
+on:
+  push:
+    branches:
+      - main
+
+# Daftar job yang dijalankan
+jobs:
+  # Nama job
+  demo-deploy:
+    # Menggunakan self-hosted runner (lokal)
+    runs-on: self-hosted
+
+    # Langkah-langkah job
+    steps:
+      # 1. Mengambil kode terbaru dari repository
+      - name: 1. Ambil perubahan kode
+        uses: actions/checkout@v3
+
+      # 2. Simulasi install dependency
+      - name: 2. Simulasi Install Dependency
+        run: echo "Sedang menginstall library yang dibutuhkan..."
+
+      # 3. Membuat file surat
+      - name: 3. Membuat surat
+        shell: cmd
+        run: |
+          echo Halo! Aku Liz dari Lumiere. > surat_dari_liz.txt
+          echo Aku bikin surat ini otomatis lho, Dibikinnya pas >> surat_dari_liz.txt
+          echo tanggal %DATE% jam %TIME% >> surat_dari_liz.txt
+
+      # 4. Selesai
+      - name: 4. Selesai
+        run: echo "Deployment Berhasil!"
